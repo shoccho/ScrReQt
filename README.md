@@ -29,6 +29,11 @@
 - capture full screen
 - capture an area of the screen
 
+## screenshots
+![fullscreen record selected](https://github.com/shoccho/ScrReQt/assets/33720947/aa3c40ff-bdf9-4c19-90cf-ed457cb9fb7a)
+![area recording with area selector open](https://github.com/shoccho/ScrReQt/assets/33720947/347d2471-a508-42a2-8842-bc841ea9c02b)
+
+
 ## Hopefully these features will be implemented in future
 
 - audio recording
