@@ -3,13 +3,19 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSizeGri
 from PyQt5.QtGui import QPainter
 from PyQt5.QtCore import Qt
 
+
 class AreaGrabber(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.initUI()
+        self.payload = None
+        self.offset = None
+        self.dragging = None
+        self.grip = None
+        self.draggable_label = None
+        self.init_ui()
 
-    def initUI(self):
+    def init_ui(self):
         # Set window properties
         self.setWindowTitle('Draggable Window')
         self.setGeometry(100, 100, 400, 300)
@@ -20,16 +26,16 @@ class AreaGrabber(QWidget):
         self.draggable_label.setStyleSheet(
             "background-color: rgba(100, 100, 255, 255); border: 1px solid black;"
         )
-        
+
         # Set layout
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         layout.addWidget(self.draggable_label)
- 
-        self.grip = QSizeGrip(self)
-        self.grip.setGeometry(self.width() - self.grip.width(), self.height() - self.grip.height(), self.grip.width(), self.grip.height())
 
+        self.grip = QSizeGrip(self)
+        self.grip.setGeometry(self.width() - self.grip.width(), self.height() - self.grip.height(), self.grip.width(),
+                              self.grip.height())
 
         # Make the window frameless
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
@@ -65,17 +71,17 @@ class AreaGrabber(QWidget):
             self.updatePayload()
             self.dragging = False
             self.offset = None
-    
+
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Escape or event.key() == Qt.Key_Enter:
             self.updatePayload()
             print(self.payload)
             self.close()
 
-            
-    def resizeEvent(self, event):
+    def resizeEvent(self, _event):
         self.updatePayload()
-        self.grip.setGeometry(self.width() - self.grip.width(), self.height() - self.grip.height(), self.grip.width(), self.grip.height())
+        self.grip.setGeometry(self.width() - self.grip.width(), self.height() - self.grip.height(), self.grip.width(),
+                              self.grip.height())
 
 
 if __name__ == '__main__':
